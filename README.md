@@ -17,3 +17,6 @@ In this activity we will create a Github repository and add group members as col
 ### Hints
 
 * Ask an instructor or TA if you get stuck!
+
+
+
