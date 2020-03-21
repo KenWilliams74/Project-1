@@ -2,6 +2,8 @@
 $("#getCardsBtn").on("click", function () {
 
     var playerIDs = [401, 15, 237, 115, 192, 274, 145, 246, 172, 278, 79, 472, 447, 228, 185, 189, 367, 322, 132, 268];
+    var player = {};
+
 
 
     for(var i = 0; i < 3; i++) {
@@ -23,6 +25,14 @@ $("#getCardsBtn").on("click", function () {
             cardBody.append(playerName, height, weight, team);
             playerCard.append(cardBody);
             $("body").append(playerCard);
+            
+            player.id = playerIDs[random];
+            player.firstName = response.first_name;
+            player.lastName = response.last_name;
+            player.heightFeet = response.height_feet;
+            player.heightInches = response.height_inches;
+            player.weight = response.weight_pounds;
+            player.teamName = response.team.full_name;
 
 
             var statsURL = "https://www.balldontlie.io/api/v1/stats?player_ids[]=" + playerIDs[random] + "&seasons[]=2018";
@@ -45,14 +55,17 @@ $("#getCardsBtn").on("click", function () {
                 assists = assists / response.data.length;
                 rebounds = rebounds / response.data.length;
         
-                var ppg = $("<p>").text("PPG: " + points);
-                var apg = $("<p>").text("APG: " + assists);
-                var rpg = $("<p>").text("RPG: " + rebounds);
+                var ppg = $("<p>").text("2018 PPG: " + points);
+                var apg = $("<p>").text("2018 APG: " + assists);
+                var rpg = $("<p>").text("2018 RPG: " + rebounds);
 
                 cardBody.append(ppg, apg, rpg);
 
-            })
+                player.ppg = points;
+                player.apg = assists;
+                player.rpg = rebounds;
 
+            })
 
     
             var giphyURL = "https://api.giphy.com/v1/gifs/search?api_key=r5a74bhCukDolWrKODqTTY4GbFMqGnP5&q=" + response.first_name + " " + response.last_name + "&limit=10&offset=0&rating=R&lang=en";
@@ -60,15 +73,24 @@ $("#getCardsBtn").on("click", function () {
                 url: giphyURL,
                 method: "GET"
             }).then(function (response) {
-        
+                
+                console.log(response);
+
                 var gifDiv = $("<div>").addClass("uk-card-media-top");
-                var gif = $("<img>").attr("src", response.data[0].images.fixed_height.url);
+                var gif = $("<img>").attr("src", response.data[0].images.downsized_large.url);
                 gifDiv.append(gif);
                 $(playerCard).prepend(gifDiv);
                 $(".player-div").append(playerCard);
 
+                player.gif = response.data[0].images.downsized_large.url;
+
             })
+
         })
+
+        localStorage.setItem(toString(player.id), JSON.stringify(player));
+
+        
     }
     
 
