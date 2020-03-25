@@ -7,11 +7,12 @@ var playerIDs = [401, 15, 237, 115, 192, 274, 145, 246, 172, 278, 79, 472, 447, 
 
 $("#getCardsBtn").on("click", function () {
     //var playerMap = new Map();
+    let random;
 
     for (var i = 0; i < 3; i++) {
-        var random = Math.floor(Math.random() * (playerIDs.length));
-        var queryUrl = "https://www.balldontlie.io/api/v1/players/" + playerIDs[random];
-
+        random = Math.floor(Math.random() * (playerIDs.length));
+        let queryUrl = "https://www.balldontlie.io/api/v1/players/" + playerIDs[random];
+        let statsURL = "https://www.balldontlie.io/api/v1/stats?player_ids[]=" + playerIDs[random] + "&seasons[]=2018";
 
         $.ajax({
             url: queryUrl,
@@ -40,11 +41,12 @@ $("#getCardsBtn").on("click", function () {
             player.teamName = response.team.full_name;
 
 
-            var statsURL = "https://www.balldontlie.io/api/v1/stats?player_ids[]=" + playerIDs[random] + "&seasons[]=2018";
             $.ajax({
                 url: statsURL,
                 method: "GET"
             }).then(function (response) {
+
+                console.log(response);
 
                 var points = 0;
                 var assists = 0;
@@ -100,12 +102,12 @@ $("#getCardsBtn").on("click", function () {
 // Code for mycards.html
 
 $("#myCardsBtn").on("click", function () {
-    
+
     var players = JSON.parse(localStorage.getItem("playerArray"));
     console.log(players);
 
-    for(var i = 0; i < players.length; i++) {
-        if(players[i].ppg) {
+    for (var i = 0; i < players.length; i++) {
+        if (players[i].ppg) {
 
         }
     }
