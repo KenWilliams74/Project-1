@@ -1,21 +1,21 @@
 
 $("#getCardsBtn").on("click", function () {
-
     var playerIDs = [401, 15, 237, 115, 192, 274, 145, 246, 172, 278, 79, 472, 447, 228, 185, 189, 367, 322, 132, 268];
-    var playerMap = new Map();
+    //var playerMap = new Map();
 
-
-
+    var playerArray = [];
+    
     for (var i = 0; i < 3; i++) {
         var random = Math.floor(Math.random() * (playerIDs.length));
         var queryUrl = "https://www.balldontlie.io/api/v1/players/" + playerIDs[random];
-        var player = {};
 
 
         $.ajax({
             url: queryUrl,
             method: "GET"
         }).then(function (response) {
+            
+            var player = {};
 
             var playerCard = $("<div>").addClass("uk-card uk-card-default").addClass("player-card");
             var cardBody = $("<div>").addClass("uk-card-body");
@@ -35,7 +35,6 @@ $("#getCardsBtn").on("click", function () {
             player.heightInches = response.height_inches;
             player.weight = response.weight_pounds;
             player.teamName = response.team.full_name;
-            console.log(player);
 
 
             var statsURL = "https://www.balldontlie.io/api/v1/stats?player_ids[]=" + playerIDs[random] + "&seasons[]=2018";
@@ -53,6 +52,7 @@ $("#getCardsBtn").on("click", function () {
                     assists += response.data[j].ast;
                     rebounds += response.data[j].reb;
                 }
+
                 points = points / response.data.length;
                 assists = assists / response.data.length;
                 rebounds = rebounds / response.data.length;
@@ -67,42 +67,41 @@ $("#getCardsBtn").on("click", function () {
                 player.apg = assists;
                 player.rpg = rebounds;
 
+                var giphyURL = "https://api.giphy.com/v1/gifs/search?api_key=r5a74bhCukDolWrKODqTTY4GbFMqGnP5&q=" + player.firstName + " " + player.lastName + "&limit=10&offset=0&rating=R&lang=en";
+                $.ajax({
+                    url: giphyURL,
+                    method: "GET"
+                }).then(function (response) {
+
+                    var gifDiv = $("<div>").addClass("uk-card-media-top");
+                    var gif = $("<img>").attr("src", response.data[0].images.downsized_large.url);
+                    gifDiv.append(gif);
+                    $(playerCard).prepend(gifDiv);
+                    $(".player-div").append(playerCard);
+
+                    player.gif = response.data[0].images.downsized_large.url;
+
+                    playerArray.push(player);
+
+                    localStorage.setItem("playerArray", JSON.stringify(playerArray));
+
+                    //playerMap = playerMap.set(player.id, player);
+                    //localStorage.setItem("playerMap", JSON.stringify(Array.from(playerMap.entries())));
+                })
             })
-
-
-            var giphyURL = "https://api.giphy.com/v1/gifs/search?api_key=r5a74bhCukDolWrKODqTTY4GbFMqGnP5&q=" + response.first_name + " " + response.last_name + "&limit=10&offset=0&rating=R&lang=en";
-            $.ajax({
-                url: giphyURL,
-                method: "GET"
-            }).then(function (response) {
-
-                var gifDiv = $("<div>").addClass("uk-card-media-top");
-                var gif = $("<img>").attr("src", response.data[0].images.downsized_large.url);
-                gifDiv.append(gif);
-                $(playerCard).prepend(gifDiv);
-                $(".player-div").append(playerCard);
-
-                player.gif = response.data[0].images.downsized_large.url;
-
-            })
-
-            playerMap = playerMap.set(player.id, player);
-            console.log(playerMap);
-            localStorage.setItem("playerMap", JSON.stringify(Array.from(playerMap.entries())));
-
-
         })
-
     }
-
-
-
-
-
 })
-
-
 //code to retrieve map from localstorage
-
 //map = new Map(JSON.parse(localStorage.myMap));
+
+function getAllCards() {
+    var players = JSON.parse(localStorage.getItem("playerArray"));
+    console.log(players);
+
+}
+
+getAllCards();
+
+
 
