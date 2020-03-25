@@ -1,10 +1,13 @@
 
+
+var playerArray = [];
+var playerIDs = [401, 15, 237, 115, 192, 274, 145, 246, 172, 278, 79, 472, 447, 228, 185, 189, 367, 322, 132, 268];
+
+
+
 $("#getCardsBtn").on("click", function () {
-    var playerIDs = [401, 15, 237, 115, 192, 274, 145, 246, 172, 278, 79, 472, 447, 228, 185, 189, 367, 322, 132, 268];
     //var playerMap = new Map();
 
-    var playerArray = [];
-    
     for (var i = 0; i < 3; i++) {
         var random = Math.floor(Math.random() * (playerIDs.length));
         var queryUrl = "https://www.balldontlie.io/api/v1/players/" + playerIDs[random];
@@ -14,7 +17,7 @@ $("#getCardsBtn").on("click", function () {
             url: queryUrl,
             method: "GET"
         }).then(function (response) {
-            
+
             var player = {};
 
             var playerCard = $("<div>").addClass("uk-card uk-card-default uk-width-large@m card-space").addClass("player-card");
@@ -53,19 +56,19 @@ $("#getCardsBtn").on("click", function () {
                     rebounds += response.data[j].reb;
                 }
 
-                points = points / response.data.length;
-                assists = assists / response.data.length;
-                rebounds = rebounds / response.data.length;
+                var avgPoints = points / response.data.length;
+                var avgAssists = assists / response.data.length;
+                var avgRebounds = rebounds / response.data.length;
 
-                var ppg = $("<p>").text("2018 PPG: " + points);
-                var apg = $("<p>").text("2018 APG: " + assists);
-                var rpg = $("<p>").text("2018 RPG: " + rebounds);
+                var ppg = $("<p>").text("2018 PPG: " + avgPoints);
+                var apg = $("<p>").text("2018 APG: " + avgAssists);
+                var rpg = $("<p>").text("2018 RPG: " + avgRebounds);
 
                 cardBody.append(ppg, apg, rpg);
 
-                player.ppg = points;
-                player.apg = assists;
-                player.rpg = rebounds;
+                player.ppg = avgPoints;
+                player.apg = avgAssists;
+                player.rpg = avgRebounds;
 
                 var giphyURL = "https://api.giphy.com/v1/gifs/search?api_key=r5a74bhCukDolWrKODqTTY4GbFMqGnP5&q=" + player.firstName + " " + player.lastName + "&limit=10&offset=0&rating=R&lang=en";
                 $.ajax({
@@ -92,16 +95,31 @@ $("#getCardsBtn").on("click", function () {
         })
     }
 })
-//code to retrieve map from localstorage
-//map = new Map(JSON.parse(localStorage.myMap));
 
-function getAllCards() {
+
+// Code for mycards.html
+
+$("#myCardsBtn").on("click", function () {
+    
     var players = JSON.parse(localStorage.getItem("playerArray"));
     console.log(players);
 
-}
+    for(var i = 0; i < players.length; i++) {
+        if(players[i].ppg) {
 
-getAllCards();
+        }
+    }
+
+
+
+
+
+})
+
+// function getMyCards() {
+
+
+// }
 
 
 
