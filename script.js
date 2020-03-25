@@ -17,8 +17,8 @@ $("#getCardsBtn").on("click", function () {
             
             var player = {};
 
-            var playerCard = $("<div>").addClass("uk-card uk-card-default").addClass("player-card");
-            var cardBody = $("<div>").addClass("uk-card-body");
+            var playerCard = $("<div>").addClass("uk-card uk-card-default uk-width-large@m card-space").addClass("player-card");
+            var cardBody = $("<div>").addClass("uk-card-body card-space");
 
             var playerName = $("<h2>").addClass("uk-card-title").text(response.first_name + " " + response.last_name);
             var height = $("<p>").text("Height: " + response.height_feet + "' " + response.height_inches + '"');
