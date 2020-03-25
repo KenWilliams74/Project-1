@@ -17,18 +17,25 @@
         data-sizes="(min-width: 650px) 650px, 100vw" uk-img>
         <h1>Basketball Trading Cards</h1>
     </div>
-    <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover"
-        data-src="https://cdn.pixabay.com/photo/2015/03/17/01/19/wood-floor-677054_1280.jpg" uk-img>
-        <div class="uk-column-1-3 uk-child-width-expand">
-            <p id="getCardsBtn"><button class="uk-button uk-button-secondary uk-button-large">Get Cards</button></p>
-            <p><a href = "allcards.html"><button class="uk-button uk-button-secondary uk-button-large">All Cards</button></a></p>
-            <p><a href = "mycards.html"><button class="uk-button uk-button-secondary uk-button-large">My Cards</button></a></p>
+    <nav class="uk-navbar-container uk-margin uk-dark uk-navbar-transparent" uk-navbar>
+        <div class="uk-navbar-center">
+            <div class="uk-navbar-center-left">
+                <div class = "getCardsNav">
+                    <p id="getCardsBtn"><button class="uk-button uk-button-secondary uk-button-large">Get Cards</button>
+                </div>
+                <div class="uk-navbar-center-right">
+                    <div class ="getCardsNav">
+                        <a href="mycards.html"><button class="uk-button uk-button-secondary uk-button-large">My
+                                Cards</button></a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </nav>
     <div class="container" uk-grid>
-        <div class = "uk-align-center uk-width-large@m player-div"></div>
+        <div class="uk-align-center uk-width-large@m player-div"></div>
     </div>
-    
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.3.6/dist/js/uikit.min.js"></script>
