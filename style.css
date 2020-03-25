@@ -8,6 +8,7 @@ html, body {
 #main-title{
     font-family: 'Lalezar', cursive;
     text-align: right;
+    text-shadow: 3px 3px 6px red;
 }
 
 .container {
@@ -20,4 +21,8 @@ html, body {
 
 .card-space{
     padding: 20px;
+}
+
+.button-style{
+    text-shadow: 2px 2px 5px red;
 }
