@@ -1,7 +1,12 @@
-body {
+html, body {
     background-image: url("https://cdn.pixabay.com/photo/2015/03/17/01/19/wood-floor-677054_1280.jpg");
+    min-height: 100% ;
 }
 
 .container {
     padding: 5%;
+}
+
+.getCardsNav{
+    padding: 30px;
 }
