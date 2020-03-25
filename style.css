@@ -17,3 +17,7 @@ html, body {
 .getCardsNav{
     padding: 30px;
 }
+
+.card-space{
+    padding: 20px;
+}
