@@ -1,6 +1,13 @@
 html, body {
     background-image: url("https://cdn.pixabay.com/photo/2015/03/17/01/19/wood-floor-677054_1280.jpg");
     min-height: 100% ;
+    font-family: 'Lalezar', cursive;
+    font-size: x-large;
+}
+
+#main-title{
+    font-family: 'Lalezar', cursive;
+    text-align: right;
 }
 
 .container {
