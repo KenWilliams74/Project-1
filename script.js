@@ -2,23 +2,20 @@
 $("#getCardsBtn").on("click", function () {
 
     var playerIDs = [401, 15, 237, 115, 192, 274, 145, 246, 172, 278, 79, 472, 447, 228, 185, 189, 367, 322, 132, 268];
+    var playerMap = new Map();
 
 
 
     for (var i = 0; i < 3; i++) {
         var random = Math.floor(Math.random() * (playerIDs.length));
         var queryUrl = "https://www.balldontlie.io/api/v1/players/" + playerIDs[random];
-        var player = {
-            id: playerIDs[random],
-            firstName: ""
-        };
+        var player = {};
 
 
         $.ajax({
             url: queryUrl,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
 
             var playerCard = $("<div>").addClass("uk-card uk-card-default").addClass("player-card");
             var cardBody = $("<div>").addClass("uk-card-body");
@@ -47,7 +44,6 @@ $("#getCardsBtn").on("click", function () {
                 method: "GET"
             }).then(function (response) {
 
-                console.log(response);
                 var points = 0;
                 var assists = 0;
                 var rebounds = 0;
@@ -80,8 +76,6 @@ $("#getCardsBtn").on("click", function () {
                 method: "GET"
             }).then(function (response) {
 
-                console.log(response);
-
                 var gifDiv = $("<div>").addClass("uk-card-media-top");
                 var gif = $("<img>").attr("src", response.data[0].images.downsized_large.url);
                 gifDiv.append(gif);
@@ -92,10 +86,12 @@ $("#getCardsBtn").on("click", function () {
 
             })
 
-            localStorage.setItem(player.id, JSON.stringify(player));
+            playerMap = playerMap.set(player.id, player);
+            console.log(playerMap);
+            localStorage.setItem("playerMap", JSON.stringify(Array.from(playerMap.entries())));
+
 
         })
-
 
     }
 
@@ -104,3 +100,9 @@ $("#getCardsBtn").on("click", function () {
 
 
 })
+
+
+//code to retrieve map from localstorage
+
+//map = new Map(JSON.parse(localStorage.myMap));
+
