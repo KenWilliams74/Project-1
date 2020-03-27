@@ -4,9 +4,9 @@ var playerArray = [];
 var playerIDs = [401, 15, 237, 115, 192, 274, 145, 246, 172, 278, 79, 472, 447, 228, 185, 189, 367, 322, 132, 268];
 
 
-
+//code for index.html
 $("#getCardsBtn").on("click", function () {
-    //var playerMap = new Map();
+
     let random;
 
     for (var i = 0; i < 3; i++) {
@@ -86,12 +86,18 @@ $("#getCardsBtn").on("click", function () {
 
                     player.gif = response.data[0].images.downsized_large.url;
 
-                    playerArray.push(player);
-
+                   
+                    var playerExist = false;
+                    for(var i = 0; i < playerArray.length; i++) {
+                        if(playerArray[i].id === player.id) {
+                            playerExist = true;
+                        }
+                    }
+                    if(!playerExist) {
+                        playerArray.push(player);
+                    }
+                    
                     localStorage.setItem("playerArray", JSON.stringify(playerArray));
-
-                    //playerMap = playerMap.set(player.id, player);
-                    //localStorage.setItem("playerMap", JSON.stringify(Array.from(playerMap.entries())));
                 })
             })
         })
@@ -115,7 +121,7 @@ $("#myCardsBtn").on("click", function () {
             var card = $("<div>").addClass("uk-card uk-card-default uk-card-body");
             var gif = $("<img>").attr("src", players[i].gif);
             var name = $("<h2>").text(players[i].firstName + " " + players[i].lastName);
-            var teamName = $("<p>").text("Team: " + players[i].team);
+            var teamName = $("<p>").text("Team: " + players[i].teamName);
 
             card.append(gif, name, teamName);
             li.append(card);
@@ -127,7 +133,7 @@ $("#myCardsBtn").on("click", function () {
             var card = $("<div>").addClass("uk-card uk-card-default uk-card-body");
             var gif = $("<img>").attr("src", players[i].gif);
             var name = $("<h2>").text(players[i].firstName + " " + players[i].lastName);
-            var teamName = $("<p>").text("Team: " + players[i].team);
+            var teamName = $("<p>").text("Team: " + players[i].teamName);
 
             card.append(gif, name, teamName);
             li.append(card);
@@ -139,7 +145,7 @@ $("#myCardsBtn").on("click", function () {
             var card = $("<div>").addClass("uk-card uk-card-default uk-card-body");
             var gif = $("<img>").attr("src", players[i].gif);
             var name = $("<h2>").text(players[i].firstName + " " + players[i].lastName);
-            var teamName = $("<p>").text("Team: " + players[i].team);
+            var teamName = $("<p>").text("Team: " + players[i].teamName);
 
             card.append(gif, name, teamName);
             li.append(card);
@@ -149,10 +155,6 @@ $("#myCardsBtn").on("click", function () {
     }
 })
 
-// function getMyCards() {
-
-
-// }
 
 
 
