@@ -6,6 +6,20 @@ var playerIDs = [401, 15, 237, 115, 192, 274, 145, 246, 172, 278, 79, 472, 447, 
 
 //code for index.html
 $("#getCardsBtn").on("click", function () {
+    $(".player-div").empty();
+    
+    var packImgContainer = $(".uk-animation-toggle").attr("tabindex", "0");
+
+    var packImg = $("<div>").addClass("uk-animation-shake uk-animation-reverse");
+    var img = $("<img>").attr("src", "https://cdn.pixabay.com/photo/2017/06/03/07/54/basketball-2368164_960_720.jpg").attr("id", "packimg") .addClass("uk-align-center");
+
+    packImg.append(img);
+    packImgContainer.append(packImg);
+
+})
+
+$(document).on("click", "#packimg", function(event) {
+    $(this).parent().empty();
 
     let random;
 
@@ -30,7 +44,7 @@ $("#getCardsBtn").on("click", function () {
             var team = $("<p>").text("Team: " + response.team.full_name);
             cardBody.append(playerName, height, weight, team);
             playerCard.append(cardBody);
-            $("body").append(playerCard);
+            $(".cards").append(playerCard);
 
             player.id = response.id;
             player.firstName = response.first_name;
@@ -118,7 +132,7 @@ $("#myCardsBtn").on("click", function () {
         if (players[i].ppg > 24) {
             var cardDiv = $("#cardsGoHere");
             var li = $("<li>").attr("data-rarity", "legendary");
-            var card = $("<div>").addClass("uk-card uk-card-default uk-card-body");
+            var card = $("<div>").addClass("uk-card uk-card-default uk-card-body legendary");
             var gif = $("<img>").attr("src", players[i].gif);
             var name = $("<h2>").text(players[i].firstName + " " + players[i].lastName);
             var teamName = $("<p>").text("Team: " + players[i].teamName);
@@ -130,7 +144,7 @@ $("#myCardsBtn").on("click", function () {
         else if (players[i].ppg > 21) {
             var cardDiv = $("#cardsGoHere");
             var li = $("<li>").attr("data-rarity", "rare");
-            var card = $("<div>").addClass("uk-card uk-card-default uk-card-body");
+            var card = $("<div>").addClass("uk-card uk-card-default uk-card-body rare");
             var gif = $("<img>").attr("src", players[i].gif);
             var name = $("<h2>").text(players[i].firstName + " " + players[i].lastName);
             var teamName = $("<p>").text("Team: " + players[i].teamName);
@@ -142,7 +156,7 @@ $("#myCardsBtn").on("click", function () {
         else {
             var cardDiv = $("#cardsGoHere");
             var li = $("<li>").attr("data-rarity", "common");
-            var card = $("<div>").addClass("uk-card uk-card-default uk-card-body");
+            var card = $("<div>").addClass("uk-card uk-card-default uk-card-body common");
             var gif = $("<img>").attr("src", players[i].gif);
             var name = $("<h2>").text(players[i].firstName + " " + players[i].lastName);
             var teamName = $("<p>").text("Team: " + players[i].teamName);
