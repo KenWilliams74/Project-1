@@ -26,4 +26,15 @@ html, body {
 
 .button-style{
     text-shadow: 2px 2px 5px red;
+    border-style: inset;
+    border-width: 2px;
+    border-color: red;
+}
+
+#packimg {
+    height: 400px; 
+    width: 300px;
+    border-style: inset;
+    border-width: 10px;
+    border-color: red;
 }
