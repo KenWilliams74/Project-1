@@ -38,3 +38,15 @@ html, body {
     border-width: 10px;
     border-color: red;
 }
+
+.common{
+    background-image: url("https://www.sketchuptextureclub.com/public/texture_d/0082-bronze-shiny-brushed-metal-texture-hr.jpg");
+}
+
+.rare{
+    background-image: url("https://image.freepik.com/free-photo/abstract-background-from-silver-metal-plate-shiny-surface-material_28586-1016.jpg");
+}
+
+.legendary{
+    background-image: url("https://images.assetsdelivery.com/compings_v2/cobalt/cobalt1601/cobalt160100033.jpg");
+}
