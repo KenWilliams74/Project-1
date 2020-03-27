@@ -86,13 +86,18 @@ $(document).on("click", "#packimg", function(event) {
                 player.apg = avgAssists;
                 player.rpg = avgRebounds;
 
+                setRarity(playerCard, player);
+
                 var giphyURL = "https://api.giphy.com/v1/gifs/search?api_key=r5a74bhCukDolWrKODqTTY4GbFMqGnP5&q=" + player.firstName + " " + player.lastName + "&limit=10&offset=0&rating=R&lang=en";
                 $.ajax({
                     url: giphyURL,
                     method: "GET"
                 }).then(function (response) {
 
+                    console.log(response);
+
                     var gifDiv = $("<div>").addClass("uk-card-media-top");
+                    
                     var gif = $("<img>").attr("src", response.data[0].images.downsized_large.url);
                     gifDiv.append(gif);
                     $(playerCard).prepend(gifDiv);
@@ -118,9 +123,20 @@ $(document).on("click", "#packimg", function(event) {
     }
 })
 
+function setRarity(playerCard, player) {
+    if(player.ppg > 24) {
+        playerCard.addClass("legendary");
+    }
+    else if(player.ppg > 21) {
+        playerCard.addClass("rare");
+    }
+    else {
+        playerCard.addClass("common");
+    }
+}
+
 
 // Code for mycards.html
-
 $("#myCardsBtn").on("click", function () {
 
     var players = JSON.parse(localStorage.getItem("playerArray"));
