@@ -1,12 +1,14 @@
 
 
 var playerArray = [];
-var playerIDs = [401, 15, 237, 115, 192, 274, 145, 246, 172, 278, 79, 472, 447, 228, 185, 189, 367, 322, 132, 268];
+var playerIDs = [401, 15, 237, 115, 192, 274, 145, 246, 172, 278, 79, 472, 447, 228, 185, 189, 367, 322, 132, 268, 490, 88, 204, 465, 140, 250, 297, 285, 132, 378, 443, 305, 357, 177, 417, 57, 22, 17, 210, 125, 6, 286, 322, 176, 467, 37];
 
 
 //code for index.html
 $("#getCardsBtn").on("click", function () {
     $(".player-div").empty();
+    $(".uk-animation-toggle").empty();
+    
     
     var packImgContainer = $(".uk-animation-toggle").attr("tabindex", "0");
 
