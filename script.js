@@ -97,13 +97,13 @@ $(document).on("click", "#packimg", function(event) {
                     console.log(response);
 
                     var gifDiv = $("<div>").addClass("uk-card-media-top");
-                    
-                    var gif = $("<img>").attr("src", response.data[0].images.downsized_large.url);
+                    var randomNum = Math.floor(Math.random() * (10));
+                    var gif = $("<img>").attr("src", response.data[randomNum].images.downsized_large.url);
                     gifDiv.append(gif);
                     $(playerCard).prepend(gifDiv);
                     $(".player-div").append(playerCard);
 
-                    player.gif = response.data[0].images.downsized_large.url;
+                    player.gif = response.data[randomNum].images.downsized_large.url;
 
                    
                     var playerExist = false;
@@ -138,6 +138,8 @@ function setRarity(playerCard, player) {
 
 // Code for mycards.html
 $("#myCardsBtn").on("click", function () {
+    $("#cardsGoHere").empty();
+
 
     var players = JSON.parse(localStorage.getItem("playerArray"));
     console.log(players);
